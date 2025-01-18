@@ -19,7 +19,6 @@ def can_place_x_y(board, stone, x, y):
             return True  # 石を置ける条件を満たす
 
     return False
-
 class MaruAI(object):
     def __init__(self):
         # 基本的なスコアマップ
