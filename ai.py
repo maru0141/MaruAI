@@ -128,10 +128,14 @@ class MaruAI(object):
         return best_move
 
 move = whiteai.place(copy(board), WHITE)
+
+# moveがNoneの場合はパス
 if move is None:
-    # パス処理
+    # パス処理（白は置ける場所がない場合）
     print("白はパスします")
 else:
+    # 石を置く処理（座標x, yが得られる）
     x, y = move
-    # 石を置く処理
     print(f"白は({x}, {y})に置きます")
+    # ここで実際に石を置く処理（盤面更新など）
+    board[y][x] = WHITE
