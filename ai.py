@@ -77,6 +77,7 @@ def score_move(board, stone, x, y):
 def find_best_move(board, stone):
     """
     最良の手を見つける関数。角優先、辺、反転数、安定した石を考慮する。
+    石を置ける場所が見つからない場合はNoneを返さず、他の選択肢を提供します。
     """
     corners = get_corner_moves()
     edge_moves = get_edge_moves()
@@ -102,7 +103,12 @@ def find_best_move(board, stone):
                     best_score = score
                     best_move = (x, y)
     
+    # もし適切な場所が見つからない場合、ランダムな場所を選ぶ
+    if best_move is None:
+        return random_place(board, stone)
+
     return best_move
+
 
 class MaruAI(object):
     def face(self):
