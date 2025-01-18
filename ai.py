@@ -19,6 +19,7 @@ def can_place_x_y(board, stone, x, y):
             return True  # 石を置ける条件を満たす
 
     return False
+    
 class MaruAI(object):
     def __init__(self):
         # 基本的なスコアマップ
@@ -125,3 +126,12 @@ class MaruAI(object):
                 best_move = (x, y)
 
         return best_move
+
+move = whiteai.place(copy(board), WHITE)
+if move is None:
+    # パス処理
+    print("白はパスします")
+else:
+    x, y = move
+    # 石を置く処理
+    print(f"白は({x}, {y})に置きます")
