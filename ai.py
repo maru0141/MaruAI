@@ -110,11 +110,10 @@ class MaruAI(object):
     def place(self, board, stone):
         """
         最善の場所を計算して石を置く。
-        置ける場所がない場合はNoneを返す（パス）。
         """
         possible_moves = self.get_possible_moves(board, stone)
         if not possible_moves:
-            return None  # パス
+            return None  # 置ける場所がない場合はパス
 
         # シミュレーションによる評価を行い最善手を探す
         best_move = None
@@ -127,39 +126,3 @@ class MaruAI(object):
                 best_move = (x, y)
 
         return best_move
-
-
-# ゲームの進行処理でMaruAIを使う場合
-def play_game(board, ai1, ai2):
-    current_player = 1  # 1が先手
-    while True:
-        # 現在のプレイヤーに応じてAIを呼び出し
-        if current_player == 1:
-            move = ai1.place(board, current_player)
-        else:
-            move = ai2.place(board, current_player)
-
-        # moveがNoneの場合（パスされた場合）
-        if move is None:
-            print(f"Player {current_player} passes.")
-        else:
-            x, y = move
-            print(f"Player {current_player} places at ({x}, {y}).")
-            board = ai1.simulate_move(board, current_player, x, y)
-
-        # 勝敗判定
-        if game_over(board):
-            break
-
-        # プレイヤー交代
-        current_player = 3 - current_player
-
-
-def game_over(board):
-    """
-    ゲーム終了の判定
-    """
-    # すべてのマスが埋まっているか、どちらもパスしているかをチェック
-    if all(cell != 0 for row in board for cell in row):
-        return True
-    return False
